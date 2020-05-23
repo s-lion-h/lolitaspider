@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.slionh.lolitaspider.mapper.ProductdetailMapper" >
+  <resultMap id="BaseResultMap" type="com.slionh.lolitaspider.entity.Productdetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="productId" property="productid" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="operId" property="operid" jdbcType="INTEGER" />
+    <result column="operDate" property="operdate" jdbcType="TIMESTAMP" />
+    <result column="productName" property="productname" jdbcType="VARCHAR" />
+    <result column="productOtherName" property="productothername" jdbcType="VARCHAR" />
+    <result column="releaseDate" property="releasedate" jdbcType="TIMESTAMP" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="productNumber" property="productnumber" jdbcType="VARCHAR" />
+    <result column="issuePrice" property="issueprice" jdbcType="VARCHAR" />
+    <result column="productLength" property="productlength" jdbcType="VARCHAR" />
+    <result column="productShoulderWidth" property="productshoulderwidth" jdbcType="VARCHAR" />
+    <result column="sleeveLength" property="sleevelength" jdbcType="VARCHAR" />
+    <result column="productnotes" property="productnotes" jdbcType="VARCHAR" />
+    <result column="productcategory" property="productcategory" jdbcType="VARCHAR" />
+    <result column="productlabel" property="productlabel" jdbcType="VARCHAR" />
+    <result column="productColor" property="productcolor" jdbcType="VARCHAR" />
+    <result column="productMaterial" property="productmaterial" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, productId, createtime, operId, operDate, productName, productOtherName, releaseDate, 
+    brand, productNumber, issuePrice, productLength, productShoulderWidth, sleeveLength, 
+    productnotes, productcategory, productlabel, productColor, productMaterial
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.slionh.lolitaspider.entity.ProductdetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from productdetail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from productdetail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from productdetail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.slionh.lolitaspider.entity.ProductdetailExample" >
+    delete from productdetail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.slionh.lolitaspider.entity.Productdetail" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into productdetail (productId, createtime, operId, 
+      operDate, productName, productOtherName, 
+      releaseDate, brand, productNumber, 
+      issuePrice, productLength, productShoulderWidth, 
+      sleeveLength, productnotes, productcategory, 
+      productlabel, productColor, productMaterial
+      )
+    values (#{productid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{operid,jdbcType=INTEGER}, 
+      #{operdate,jdbcType=TIMESTAMP}, #{productname,jdbcType=VARCHAR}, #{productothername,jdbcType=VARCHAR}, 
+      #{releasedate,jdbcType=TIMESTAMP}, #{brand,jdbcType=VARCHAR}, #{productnumber,jdbcType=VARCHAR}, 
+      #{issueprice,jdbcType=VARCHAR}, #{productlength,jdbcType=VARCHAR}, #{productshoulderwidth,jdbcType=VARCHAR}, 
+      #{sleevelength,jdbcType=VARCHAR}, #{productnotes,jdbcType=VARCHAR}, #{productcategory,jdbcType=VARCHAR}, 
+      #{productlabel,jdbcType=VARCHAR}, #{productcolor,jdbcType=VARCHAR}, #{productmaterial,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.slionh.lolitaspider.entity.Productdetail" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into productdetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productid != null" >
+        productId,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="operid != null" >
+        operId,
+      </if>
+      <if test="operdate != null" >
+        operDate,
+      </if>
+      <if test="productname != null" >
+        productName,
+      </if>
+      <if test="productothername != null" >
+        productOtherName,
+      </if>
+      <if test="releasedate != null" >
+        releaseDate,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="productnumber != null" >
+        productNumber,
+      </if>
+      <if test="issueprice != null" >
+        issuePrice,
+      </if>
+      <if test="productlength != null" >
+        productLength,
+      </if>
+      <if test="productshoulderwidth != null" >
+        productShoulderWidth,
+      </if>
+      <if test="sleevelength != null" >
+        sleeveLength,
+      </if>
+      <if test="productnotes != null" >
+        productnotes,
+      </if>
+      <if test="productcategory != null" >
+        productcategory,
+      </if>
+      <if test="productlabel != null" >
+        productlabel,
+      </if>
+      <if test="productcolor != null" >
+        productColor,
+      </if>
+      <if test="productmaterial != null" >
+        productMaterial,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operid != null" >
+        #{operid,jdbcType=INTEGER},
+      </if>
+      <if test="operdate != null" >
+        #{operdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productname != null" >
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productothername != null" >
+        #{productothername,jdbcType=VARCHAR},
+      </if>
+      <if test="releasedate != null" >
+        #{releasedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="productnumber != null" >
+        #{productnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="issueprice != null" >
+        #{issueprice,jdbcType=VARCHAR},
+      </if>
+      <if test="productlength != null" >
+        #{productlength,jdbcType=VARCHAR},
+      </if>
+      <if test="productshoulderwidth != null" >
+        #{productshoulderwidth,jdbcType=VARCHAR},
+      </if>
+      <if test="sleevelength != null" >
+        #{sleevelength,jdbcType=VARCHAR},
+      </if>
+      <if test="productnotes != null" >
+        #{productnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="productcategory != null" >
+        #{productcategory,jdbcType=VARCHAR},
+      </if>
+      <if test="productlabel != null" >
+        #{productlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="productcolor != null" >
+        #{productcolor,jdbcType=VARCHAR},
+      </if>
+      <if test="productmaterial != null" >
+        #{productmaterial,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.slionh.lolitaspider.entity.ProductdetailExample" resultType="java.lang.Integer" >
+    select count(*) from productdetail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update productdetail
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.productid != null" >
+        productId = #{record.productid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operid != null" >
+        operId = #{record.operid,jdbcType=INTEGER},
+      </if>
+      <if test="record.operdate != null" >
+        operDate = #{record.operdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.productname != null" >
+        productName = #{record.productname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productothername != null" >
+        productOtherName = #{record.productothername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.releasedate != null" >
+        releaseDate = #{record.releasedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.brand != null" >
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productnumber != null" >
+        productNumber = #{record.productnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueprice != null" >
+        issuePrice = #{record.issueprice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productlength != null" >
+        productLength = #{record.productlength,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productshoulderwidth != null" >
+        productShoulderWidth = #{record.productshoulderwidth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sleevelength != null" >
+        sleeveLength = #{record.sleevelength,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productnotes != null" >
+        productnotes = #{record.productnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productcategory != null" >
+        productcategory = #{record.productcategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productlabel != null" >
+        productlabel = #{record.productlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productcolor != null" >
+        productColor = #{record.productcolor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productmaterial != null" >
+        productMaterial = #{record.productmaterial,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update productdetail
+    set id = #{record.id,jdbcType=INTEGER},
+      productId = #{record.productid,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      operId = #{record.operid,jdbcType=INTEGER},
+      operDate = #{record.operdate,jdbcType=TIMESTAMP},
+      productName = #{record.productname,jdbcType=VARCHAR},
+      productOtherName = #{record.productothername,jdbcType=VARCHAR},
+      releaseDate = #{record.releasedate,jdbcType=TIMESTAMP},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      productNumber = #{record.productnumber,jdbcType=VARCHAR},
+      issuePrice = #{record.issueprice,jdbcType=VARCHAR},
+      productLength = #{record.productlength,jdbcType=VARCHAR},
+      productShoulderWidth = #{record.productshoulderwidth,jdbcType=VARCHAR},
+      sleeveLength = #{record.sleevelength,jdbcType=VARCHAR},
+      productnotes = #{record.productnotes,jdbcType=VARCHAR},
+      productcategory = #{record.productcategory,jdbcType=VARCHAR},
+      productlabel = #{record.productlabel,jdbcType=VARCHAR},
+      productColor = #{record.productcolor,jdbcType=VARCHAR},
+      productMaterial = #{record.productmaterial,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.slionh.lolitaspider.entity.Productdetail" >
+    update productdetail
+    <set >
+      <if test="productid != null" >
+        productId = #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operid != null" >
+        operId = #{operid,jdbcType=INTEGER},
+      </if>
+      <if test="operdate != null" >
+        operDate = #{operdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productname != null" >
+        productName = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productothername != null" >
+        productOtherName = #{productothername,jdbcType=VARCHAR},
+      </if>
+      <if test="releasedate != null" >
+        releaseDate = #{releasedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="productnumber != null" >
+        productNumber = #{productnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="issueprice != null" >
+        issuePrice = #{issueprice,jdbcType=VARCHAR},
+      </if>
+      <if test="productlength != null" >
+        productLength = #{productlength,jdbcType=VARCHAR},
+      </if>
+      <if test="productshoulderwidth != null" >
+        productShoulderWidth = #{productshoulderwidth,jdbcType=VARCHAR},
+      </if>
+      <if test="sleevelength != null" >
+        sleeveLength = #{sleevelength,jdbcType=VARCHAR},
+      </if>
+      <if test="productnotes != null" >
+        productnotes = #{productnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="productcategory != null" >
+        productcategory = #{productcategory,jdbcType=VARCHAR},
+      </if>
+      <if test="productlabel != null" >
+        productlabel = #{productlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="productcolor != null" >
+        productColor = #{productcolor,jdbcType=VARCHAR},
+      </if>
+      <if test="productmaterial != null" >
+        productMaterial = #{productmaterial,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.slionh.lolitaspider.entity.Productdetail" >
+    update productdetail
+    set productId = #{productid,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      operId = #{operid,jdbcType=INTEGER},
+      operDate = #{operdate,jdbcType=TIMESTAMP},
+      productName = #{productname,jdbcType=VARCHAR},
+      productOtherName = #{productothername,jdbcType=VARCHAR},
+      releaseDate = #{releasedate,jdbcType=TIMESTAMP},
+      brand = #{brand,jdbcType=VARCHAR},
+      productNumber = #{productnumber,jdbcType=VARCHAR},
+      issuePrice = #{issueprice,jdbcType=VARCHAR},
+      productLength = #{productlength,jdbcType=VARCHAR},
+      productShoulderWidth = #{productshoulderwidth,jdbcType=VARCHAR},
+      sleeveLength = #{sleevelength,jdbcType=VARCHAR},
+      productnotes = #{productnotes,jdbcType=VARCHAR},
+      productcategory = #{productcategory,jdbcType=VARCHAR},
+      productlabel = #{productlabel,jdbcType=VARCHAR},
+      productColor = #{productcolor,jdbcType=VARCHAR},
+      productMaterial = #{productmaterial,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="userTables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://120.77.80.58:3306/lolitaforum?useUnicode=true&amp;characterEncoding=utf-8"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer true，把JDBC DECIMAL 和
+            NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- targetProject:生成PO类的位置 -->
+        <javaModelGenerator targetPackage="com.slionh.lolitaspider.entity"
+                            targetProject=".\src\main\java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!-- targetPackage:mapper映射文件生成的位置 -->
+        <sqlMapGenerator targetPackage="mapping"
+                         targetProject=".\src\main\resources">
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+        <!-- targetPackage：mapper接口的生成位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.slionh.lolitaspider.mapper"
+                             targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+
+        <!--<table schema="smarketdb" tableName="category"/>-->
+        <!--<table schema="diary" tableName="contact">-->
+            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+            <!--<columnOverride column="location" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+        <!--</table>-->
+        <!--<table schema="diary" tableName="festival">-->
+            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+            <!--<columnOverride column="event" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+            <!--<columnOverride column="description" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+        <!--</table>-->
+        <!--<table schema="diary" tableName="diaryatom">-->
+            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+            <!--<columnOverride column="content" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+            <!--<columnOverride column="sentiment" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+            <!--<columnOverride column="location" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+        <!--</table>-->
+        <!--<table schema="diary" tableName="wallet">-->
+            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table schema="stock2" tableName="combination">-->
+            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table schema="stock2" tableName="classification">-->
+            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
+<!--        <table schema="lolitaforum" tableName="user">-->
+<!--            <generatedKey column="userid" sqlStatement="Mysql" identity="true"/>-->
+<!--            <columnOverride column="description" jdbcType="VARCHAR"></columnOverride>-->
+<!--        </table>-->
+<!--        <table schema="lolitaforum" tableName="forumTopic">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table schema="lolitaforum" tableName="forumContent">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--            <columnOverride column="content" jdbcType="VARCHAR"></columnOverride>-->
+<!--        </table>-->
+<!--        <table schema="lolitaforum" tableName="forumComment">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table schema="lolitaforum" tableName="forumLabel">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--            <table schema="lolitaforum" tableName="product">-->
+<!--                <generatedKey column="productId" sqlStatement="Mysql" identity="true"/>-->
+<!--            </table>-->
+            <!--<table schema="lolitaforum" tableName="productdetail">-->
+                <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+            <!--</table>-->
+            <table schema="lolitaforum" tableName="brands">
+                <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            </table>
+            <table schema="lolitaforum" tableName="categories">
+                <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            </table>
+        <table schema="lolitaforum" tableName="product">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table schema="lolitaforum" tableName="productdetail">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table schema="lolitaforum" tableName="productimage">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+<!--            <table schema="lolitaforum" tableName="productImage">-->
+<!--                <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--            </table>-->
+<!--            <table schema="lolitaforum" tableName="productlabel">-->
+<!--                <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--            </table>-->
+    </context>
+</generatorConfiguration>
