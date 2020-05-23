@@ -41,7 +41,6 @@ public class BrandServiceImpl implements BrandService {
         }
         //插入数据库后保存图片到本地
         ImageUtil.Download(addImageList, BRAND_IMAGE_PATH);
-
     }
 
     @Override
