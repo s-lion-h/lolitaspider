@@ -25,7 +25,7 @@ public class BrandSpider {
     @Autowired
     private LolibraryIndexUtil indexUtil;
 
-//    @Scheduled(fixedRate = 600000)
+    @Scheduled(fixedRate = 600000)
     public void getIndexBrand() throws ParseException {
         Document document ;
         document=indexUtil.getIndexDocument();

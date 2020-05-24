@@ -90,19 +90,19 @@
             <!--<table schema="lolitaforum" tableName="productdetail">-->
                 <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
             <!--</table>-->
-            <table schema="lolitaforum" tableName="brands">
-                <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-            </table>
-            <table schema="lolitaforum" tableName="categories">
-                <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-            </table>
-        <table schema="lolitaforum" tableName="product">
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table schema="lolitaforum" tableName="productdetail">
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table schema="lolitaforum" tableName="productimage">
+<!--            <table schema="lolitaforum" tableName="brands">-->
+<!--                <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--            </table>-->
+<!--            <table schema="lolitaforum" tableName="categories">-->
+<!--                <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--            </table>-->
+<!--        <table schema="lolitaforum" tableName="product">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table schema="lolitaforum" tableName="productdetail">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+        <table schema="lolitaforum" tableName="productImage">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
 <!--            <table schema="lolitaforum" tableName="productImage">-->

@@ -5,4 +5,5 @@ import java.util.HashMap;
 public interface BrandService {
     void analysisBrand(HashMap hashMap);
     boolean isBrandNameContain(String name);
+    Integer getBrandIdByName(String name);
 }

@@ -23,4 +23,6 @@ public interface Config {
     String HEAD_IMAGE_DIR_NAME="head";
     String BRAND_IMAGE_DIR_NAME="brand";
     String CAROUSEL_IMAGE_DIR_NAME="carousel";
+
+    Integer BASE_SHOPPER_ID=9;
 }

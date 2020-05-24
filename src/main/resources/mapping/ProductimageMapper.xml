@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.slionh.lolitaspider.mapper.ProductMapper" >
-  <resultMap id="BaseResultMap" type="com.slionh.lolitaspider.entity.Product" >
-    <id column="productId" property="productid" jdbcType="INTEGER" />
-    <result column="productName" property="productname" jdbcType="VARCHAR" />
+<mapper namespace="com.slionh.lolitaspider.mapper.ProductimageMapper" >
+  <resultMap id="BaseResultMap" type="com.slionh.lolitaspider.entity.Productimage" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="productId" property="productid" jdbcType="INTEGER" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="shopperId" property="shopperid" jdbcType="INTEGER" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    productId, productName, createtime, shopperId, updatetime
+    id, productId, createtime, shopperId, updatetime, url
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.slionh.lolitaspider.entity.ProductExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.slionh.lolitaspider.entity.ProductimageExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from product
+    from productImage
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,36 +87,36 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from product
-    where productId = #{productid,jdbcType=INTEGER}
+    from productImage
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from product
-    where productId = #{productid,jdbcType=INTEGER}
+    delete from productImage
+    where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.slionh.lolitaspider.entity.ProductExample" >
-    delete from product
+  <delete id="deleteByExample" parameterType="com.slionh.lolitaspider.entity.ProductimageExample" >
+    delete from productImage
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.slionh.lolitaspider.entity.Product" >
-    <selectKey resultType="java.lang.Integer" keyProperty="productid" order="AFTER" >
+  <insert id="insert" parameterType="com.slionh.lolitaspider.entity.Productimage" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into product (productId, productName, createtime, 
-      shopperId, updatetime)
-    values (#{productid,jdbcType=INTEGER}, #{productname,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{shopperid,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP})
+    insert into productImage (productId, createtime, shopperId, 
+      updatetime, url)
+    values (#{productid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{shopperid,jdbcType=INTEGER}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{url,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.slionh.lolitaspider.entity.Product" >
-    insert into product
+  <insert id="insertSelective" parameterType="com.slionh.lolitaspider.entity.Productimage" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into productImage
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="productid != null" >
         productId,
-      </if>
-      <if test="productname != null" >
-        productName,
       </if>
       <if test="createtime != null" >
         createtime,
@@ -126,13 +127,13 @@
       <if test="updatetime != null" >
         updatetime,
       </if>
+      <if test="url != null" >
+        url,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="productid != null" >
         #{productid,jdbcType=INTEGER},
-      </if>
-      <if test="productname != null" >
-        #{productname,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null" >
         #{createtime,jdbcType=TIMESTAMP},
@@ -143,22 +144,25 @@
       <if test="updatetime != null" >
         #{updatetime,jdbcType=TIMESTAMP},
       </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.slionh.lolitaspider.entity.ProductExample" resultType="java.lang.Integer" >
-    select count(*) from product
+  <select id="countByExample" parameterType="com.slionh.lolitaspider.entity.ProductimageExample" resultType="java.lang.Integer" >
+    select count(*) from productImage
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update product
+    update productImage
     <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
       <if test="record.productid != null" >
         productId = #{record.productid,jdbcType=INTEGER},
-      </if>
-      <if test="record.productname != null" >
-        productName = #{record.productname,jdbcType=VARCHAR},
       </if>
       <if test="record.createtime != null" >
         createtime = #{record.createtime,jdbcType=TIMESTAMP},
@@ -169,27 +173,31 @@
       <if test="record.updatetime != null" >
         updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update product
-    set productId = #{record.productid,jdbcType=INTEGER},
-      productName = #{record.productname,jdbcType=VARCHAR},
+    update productImage
+    set id = #{record.id,jdbcType=INTEGER},
+      productId = #{record.productid,jdbcType=INTEGER},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       shopperId = #{record.shopperid,jdbcType=INTEGER},
-      updatetime = #{record.updatetime,jdbcType=TIMESTAMP}
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      url = #{record.url,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.slionh.lolitaspider.entity.Product" >
-    update product
+  <update id="updateByPrimaryKeySelective" parameterType="com.slionh.lolitaspider.entity.Productimage" >
+    update productImage
     <set >
-      <if test="productname != null" >
-        productName = #{productname,jdbcType=VARCHAR},
+      <if test="productid != null" >
+        productId = #{productid,jdbcType=INTEGER},
       </if>
       <if test="createtime != null" >
         createtime = #{createtime,jdbcType=TIMESTAMP},
@@ -200,15 +208,19 @@
       <if test="updatetime != null" >
         updatetime = #{updatetime,jdbcType=TIMESTAMP},
       </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
     </set>
-    where productId = #{productid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.slionh.lolitaspider.entity.Product" >
-    update product
-    set productName = #{productname,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.slionh.lolitaspider.entity.Productimage" >
+    update productImage
+    set productId = #{productid,jdbcType=INTEGER},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       shopperId = #{shopperid,jdbcType=INTEGER},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP}
-    where productId = #{productid,jdbcType=INTEGER}
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      url = #{url,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

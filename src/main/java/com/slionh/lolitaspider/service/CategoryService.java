@@ -5,4 +5,5 @@ import java.util.HashMap;
 public interface CategoryService {
     void analysisCategory(HashMap hashMap);
     boolean isCategoryNameContain(String name);
+    Integer getCategoryIdByName(String name);
 }

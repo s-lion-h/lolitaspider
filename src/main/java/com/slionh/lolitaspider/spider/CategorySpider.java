@@ -24,7 +24,7 @@ public class CategorySpider {
     @Autowired
     private LolibraryIndexUtil indexUtil;
 
-//    @Scheduled(fixedRate = 600000)
+    @Scheduled(fixedRate = 600000)
     public void getIndexCategory() throws ParseException {
         Document document ;
         document=indexUtil.getIndexDocument();

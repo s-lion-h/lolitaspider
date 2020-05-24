@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.*;
 
+import static com.slionh.lolitaspider.configuration.Config.BRAND_IMAGE_DIR_NAME;
 import static com.slionh.lolitaspider.configuration.Config.BRAND_IMAGE_PATH;
 
 @Service
@@ -34,7 +35,7 @@ public class BrandServiceImpl implements BrandService {
                 brands.setCreatername("autoSpider");
                 brands.setName(entry.getKey().toString());
                 brands.setOther(entry.getKey().toString());
-                brands.setImage(entry.getValue().toString().replace(brandHeadUrl,"brand"));
+                brands.setImage(entry.getValue().toString().replace(brandHeadUrl,BRAND_IMAGE_DIR_NAME));
                 mapper.insert(brands);
                 addImageList.add((entry.getValue().toString()));
             }
@@ -48,5 +49,16 @@ public class BrandServiceImpl implements BrandService {
         BrandsExample example=new BrandsExample();
         example.createCriteria().andNameEqualTo(name);
         return mapper.selectByExample(example).size()>0?true:false;
+    }
+
+    @Override
+    public Integer getBrandIdByName(String name) {
+        BrandsExample example=new BrandsExample();
+        example.createCriteria().andNameEqualTo(name);
+
+        List<Brands> brands =  mapper.selectByExample(example);
+        if (brands.size()<=0)
+            return 0;
+        return mapper.selectByExample(example).get(0).getId();
     }
 }

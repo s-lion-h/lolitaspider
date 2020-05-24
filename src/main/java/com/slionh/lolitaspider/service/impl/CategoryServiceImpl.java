@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.*;
 
-import static com.slionh.lolitaspider.configuration.Config.CATEGORY_IMAGE_PATH;
+import static com.slionh.lolitaspider.configuration.Config.*;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -30,11 +30,11 @@ public class CategoryServiceImpl implements CategoryService {
                 //包含，所以什么都不做
             }else{
                 Categories categories=new Categories();
-                categories.setCreaterid(9);
+                categories.setCreaterid(BASE_SHOPPER_ID);
                 categories.setCreatername("autoSpider");
                 categories.setName(entry.getKey().toString());
                 categories.setOther(entry.getKey().toString());
-                categories.setImage(entry.getValue().toString().replace(categoryHeadUrl,"category"));
+                categories.setImage(entry.getValue().toString().replace(categoryHeadUrl,CATEGORY_IMAGE_DIR_NAME));
                 mapper.insert(categories);
                 addImageList.add((entry.getValue().toString()));
             }
@@ -49,5 +49,16 @@ public class CategoryServiceImpl implements CategoryService {
         example.createCriteria().andNameEqualTo(name);
 
         return mapper.selectByExample(example).size()>0?true:false;
+    }
+
+    @Override
+    public Integer getCategoryIdByName(String name) {
+        CategoriesExample example=new CategoriesExample();
+        example.createCriteria().andNameEqualTo(name);
+
+        List<Categories> list = mapper.selectByExample(example);
+        if (list.size()<=0)
+            return 0;
+        return list.get(0).getId();
     }
 }
