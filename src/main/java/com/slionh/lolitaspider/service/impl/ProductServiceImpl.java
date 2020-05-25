@@ -45,6 +45,7 @@ public class ProductServiceImpl implements ProductService {
                 Product product=new Product();
                 product.setProductname(entry.getKey().toString());
                 product.setUpdatetime(new Date());
+                product.setCreatetime(new Date());
                 product.setShopperid(BASE_SHOPPER_ID);
                 productMapper.insert(product);
 
@@ -69,7 +70,7 @@ public class ProductServiceImpl implements ProductService {
         Iterator iteratorDetail=idUrlMap.entrySet().iterator();
 
         while (iteratorDetail.hasNext()){
-            Map.Entry entry = (Map.Entry) iterator.next();
+            Map.Entry entry = (Map.Entry) iteratorDetail.next();
             itemDetailSpider.getProductDetailByUrl(entry.getKey().toString(),Integer.parseInt(entry.getValue().toString()));
 
         }

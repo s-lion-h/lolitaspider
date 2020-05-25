@@ -52,9 +52,9 @@ public class ItemDetailSpider {
         productdetail.setOperid(BASE_SHOPPER_ID);
         productdetail.setOperdate(new Date());
         productdetail.setIssueprice(price.text());
-        productdetail.setProductnotes(notes.text());
+        productdetail.setProductnotes(notes.text().substring(0,notes.text().length()>1000?1000:notes.text().length()));
         productdetail.setBrand(""+brandService.getBrandIdByName(brandName.text()));
-        productdetail.setBrand(""+categoryService.getCategoryIdByName(categoryName.text()));
+        productdetail.setProductcategory(""+categoryService.getCategoryIdByName(categoryName.text()));
 
         productdetail.setReleasedate(new Date());
 
